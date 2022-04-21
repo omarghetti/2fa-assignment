@@ -1,4 +1,10 @@
+from typing import Optional
 from pydantic import BaseModel
+
+
+class UserToken(BaseModel):
+    access_token: str
+    expires_on: str
 
 
 class UserBase(BaseModel):
@@ -13,6 +19,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     hashed_password: str
+    otp_secret: Optional[str]
 
     class Config:
         orm_mode = True

@@ -1,0 +1,5 @@
+"fastapi[all]"
+"pyotp"
+"passlib[bcrypt]"
+"sqlalchemy"
+"pyjwt"
