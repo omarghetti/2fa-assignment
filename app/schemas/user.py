@@ -2,6 +2,11 @@ from typing import Optional
 from pydantic import BaseModel
 
 
+class OtpVerifyPayload(BaseModel):
+    code: str
+    email: str
+
+
 class UserToken(BaseModel):
     access_token: str
     expires_on: str

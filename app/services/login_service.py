@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from re import U
 from xml.dom.minidom import Identified
 from schemas.user import UserCreate, UserToken
 from sqlalchemy.orm import Session
@@ -52,6 +53,16 @@ async def store_login_attempt(user: User, db: Session):
     db.refresh(db_session)
     print(totp)
     return db_session
+
+
+async def verify_otp(code: str, email: str, db: Session):
+    user = await get_user_by_email(db, email)
+    if not user:
+        return False
+    otp_code = db.query(LoginSession).filter(
+        LoginSession.user_id == user.id).first()
+    session_token = await create_session_token(user)
+    return session_token
 
 
 async def get_user_by_email(db: Session, email: str):

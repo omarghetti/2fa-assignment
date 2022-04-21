@@ -1,7 +1,7 @@
 import code
 from fastapi import FastAPI, Depends, HTTPException, status
-from schemas.user import User, UserCreate, UserToken
-from services.login_service import authenticate_user, register_user, create_session_token, store_login_attempt
+from schemas.user import OtpVerifyPayload, User, UserCreate
+from services.login_service import authenticate_user, register_user, create_session_token, store_login_attempt, verify_otp
 from services.database_service import create_database, get_db
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -33,5 +33,11 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @app.post("/verify")
-async def verifyOtp():
-    return {"message": "OTP Correct"}
+async def verifyOtp(otpPayload: OtpVerifyPayload, db: Session = Depends(get_db)):
+    otp_verified = await verify_otp(otpPayload.code, otpPayload.email, db)
+    if not otp_verified:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            details="OTP non valido"
+        )
+    return {"access_token": otp_verified.access_token, "expires_on": otp_verified.expires_on}
