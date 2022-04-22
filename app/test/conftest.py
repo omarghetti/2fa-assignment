@@ -1,8 +1,6 @@
 from httpx import AsyncClient
 import pytest
 import sqlalchemy as _sql
-import sqlalchemy.ext.declarative as _declarative
-import sqlalchemy.orm as _orm
 from sqlalchemy_utils import create_database
 from sqlalchemy_utils import database_exists
 from app.db.db import Base, SessionLocal
@@ -34,8 +32,8 @@ def get_test_db(db_engine):
 
 
 @pytest.fixture(scope="function")
-def async_client(get_test_db):
+async def async_client(get_test_db):
     app.dependency_overrides[get_db] = lambda: get_test_db
 
-    with AsyncClient(app=app, base_url="http://test") as ac:
+    async with AsyncClient(app=app, base_url="http://test") as ac:
         yield ac
