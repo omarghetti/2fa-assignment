@@ -1,4 +1,4 @@
-import db.db as _db
+import app.db.db as _db
 
 
 def create_database():

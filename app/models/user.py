@@ -1,7 +1,7 @@
 from enum import unique
 import sqlalchemy as _sql
 from sqlalchemy.orm import relationship
-import db.db as _database
+import app.db.db as _database
 
 
 class User(_database.Base):

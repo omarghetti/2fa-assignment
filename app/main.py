@@ -1,8 +1,7 @@
-import code
 from fastapi import FastAPI, Depends, HTTPException, status
-from schemas.user import OtpVerifyPayload, User, UserCreate
-from services.login_service import authenticate_user, register_user, create_session_token, store_login_attempt, verify_otp
-from services.database_service import create_database, get_db
+from app.schemas.user import OtpVerifyPayload, User, UserCreate
+from app.services.login_service import authenticate_user, register_user, create_session_token, store_login_attempt, verify_otp
+from app.services.database_service import create_database, get_db
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
