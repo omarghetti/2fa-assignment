@@ -38,12 +38,10 @@ async def test_register_new_user_enabled():
 
 
 @pytest.mark.anyio
-async def test_login_disabled_2fa():
+async def test_login_failed():
     login_request = {"username": "test_disabled@gmail.com",
                      "password": "ciao1234"}
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     response = await client.post("/login", data=login_request, headers=headers)
-    data = response.json()
 
-    assert response.status_code == 200
-    assert data["access_token"]
+    assert response.status_code == 401

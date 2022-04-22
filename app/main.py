@@ -16,7 +16,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            details="username non valido"
+            detail="username non valido"
         )
     if not user.enable_2fa:
         access_token = await create_session_token(user)
@@ -37,6 +37,6 @@ async def verifyOtp(otpPayload: OtpVerifyPayload, db: Session = Depends(get_db))
     if not otp_verified:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            details="OTP non valido"
+            detail="OTP non valido"
         )
     return {"access_token": otp_verified.access_token, "expires_on": otp_verified.expires_on}
