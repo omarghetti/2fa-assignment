@@ -13,7 +13,7 @@ client = AsyncClient(app=app, base_url="http://test")
 Base.metadata.create_all(bind=_db.db_engine)
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 async def test_register_new_user_disabled():
     disabled_request = {"email": "test_disabled@gmail.com",
                         "enable_2fa": False, "password": "ciao1234"}
@@ -25,7 +25,7 @@ async def test_register_new_user_disabled():
     assert otp_secret == None
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 async def test_register_new_user_enabled():
     enabled_request = {"email": "test_enabled@gmail.com",
                        "enable_2fa": True, "password": "ciao1234"}
@@ -37,7 +37,7 @@ async def test_register_new_user_enabled():
     assert len(otp_secret) == 32
 
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 async def test_login_failed():
     login_request = {"username": "test_disabled@gmail.com",
                      "password": "ciao1234"}
