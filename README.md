@@ -1,5 +1,7 @@
 ## 2FA AUTHENTICATION
 
+[![CircleCI](https://circleci.com/gh/omarghetti/2fa-assignment/tree/master.svg?style=svg)](https://circleci.com/gh/omarghetti/2fa-assignment/tree/master)
+
 This is a demo project of an implementation of a 2FA Authentication Flow
 
 To run the project, build the .Dockerfile in the repository and then run the command
