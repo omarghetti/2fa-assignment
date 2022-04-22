@@ -3,3 +3,5 @@ pyotp
 passlib[bcrypt]
 sqlalchemy
 pyjwt
+httpx
+trio
