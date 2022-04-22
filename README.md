@@ -20,3 +20,8 @@ The API has 3 Different Endpoints:
   /verify: if the user has enable_2fa flag on TRUE, the /login endpoint produces an otp code that, for experimental reasons, is printed out on the stdout.
   this endpoint enables to check the otp and to then get back a JWT followed by an expiration date
   
+  Tests are provided for every endpoint in this list, and a CirceCI pipeline is running a test phase on committing/merging on the master branch
+  
+  to run tests in local environment, after installing all the required dependencies, just run command
+      
+      pytest
