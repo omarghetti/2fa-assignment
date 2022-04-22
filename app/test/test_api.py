@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 import app.test.db as _db
 from app.main import app
 from app.db.db import Base
