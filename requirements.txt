@@ -7,3 +7,4 @@ httpx
 trio
 pytest
 pytest-asyncio
+sqlalchemy_utils
